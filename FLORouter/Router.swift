@@ -54,7 +54,7 @@ public class Router: NSObject {
     
 // MARK: - Handler Management
     
-    private var handlers: [Int: RouteHandler] = [:]
+    private(set) var handlers: [Int: RouteHandler] = [:]
     private var currentHandlerIndex = -1
     
     @discardableResult
