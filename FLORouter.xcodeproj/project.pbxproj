@@ -10,6 +10,13 @@
 		13DA55F71EB3865500C41F1A /* FLORouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DA55ED1EB3865500C41F1A /* FLORouter.framework */; };
 		13DA55FC1EB3865500C41F1A /* FLORouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA55FB1EB3865500C41F1A /* FLORouterTests.swift */; };
 		13DA55FE1EB3865500C41F1A /* FLORouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DA55F01EB3865500C41F1A /* FLORouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		13DA560E1EB3867E00C41F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA560D1EB3867E00C41F1A /* AppDelegate.swift */; };
+		13DA56101EB3867E00C41F1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA560F1EB3867E00C41F1A /* ViewController.swift */; };
+		13DA56121EB3867E00C41F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13DA56111EB3867E00C41F1A /* Assets.xcassets */; };
+		13DA56151EB3867E00C41F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13DA56131EB3867E00C41F1A /* Main.storyboard */; };
+		13DA561B1EB3874A00C41F1A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561A1EB3874A00C41F1A /* Router.swift */; };
+		13DA561D1EB38C7800C41F1A /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */; };
+		13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561E1EB3904B00C41F1A /* RouteHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,15 @@
 		13DA55F61EB3865500C41F1A /* FLORouterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLORouterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13DA55FB1EB3865500C41F1A /* FLORouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLORouterTests.swift; sourceTree = "<group>"; };
 		13DA55FD1EB3865500C41F1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13DA560B1EB3867E00C41F1A /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13DA560D1EB3867E00C41F1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		13DA560F1EB3867E00C41F1A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		13DA56111EB3867E00C41F1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		13DA56141EB3867E00C41F1A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		13DA56161EB3867E00C41F1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		13DA561A1EB3874A00C41F1A /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRequest.swift; sourceTree = "<group>"; };
+		13DA561E1EB3904B00C41F1A /* RouteHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +63,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		13DA56081EB3867E00C41F1A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -55,6 +78,7 @@
 			children = (
 				13DA55EF1EB3865500C41F1A /* FLORouter */,
 				13DA55FA1EB3865500C41F1A /* FLORouterTests */,
+				13DA560C1EB3867E00C41F1A /* Demo */,
 				13DA55EE1EB3865500C41F1A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,6 +88,7 @@
 			children = (
 				13DA55ED1EB3865500C41F1A /* FLORouter.framework */,
 				13DA55F61EB3865500C41F1A /* FLORouterTests.xctest */,
+				13DA560B1EB3867E00C41F1A /* Demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -72,6 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				13DA55F01EB3865500C41F1A /* FLORouter.h */,
+				13DA561A1EB3874A00C41F1A /* Router.swift */,
+				13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */,
+				13DA561E1EB3904B00C41F1A /* RouteHandler.swift */,
 				13DA55F11EB3865500C41F1A /* Info.plist */,
 			);
 			path = FLORouter;
@@ -84,6 +112,18 @@
 				13DA55FD1EB3865500C41F1A /* Info.plist */,
 			);
 			path = FLORouterTests;
+			sourceTree = "<group>";
+		};
+		13DA560C1EB3867E00C41F1A /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				13DA560D1EB3867E00C41F1A /* AppDelegate.swift */,
+				13DA560F1EB3867E00C41F1A /* ViewController.swift */,
+				13DA56111EB3867E00C41F1A /* Assets.xcassets */,
+				13DA56131EB3867E00C41F1A /* Main.storyboard */,
+				13DA56161EB3867E00C41F1A /* Info.plist */,
+			);
+			path = Demo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +176,23 @@
 			productReference = 13DA55F61EB3865500C41F1A /* FLORouterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		13DA560A1EB3867E00C41F1A /* Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13DA56171EB3867E00C41F1A /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildPhases = (
+				13DA56071EB3867E00C41F1A /* Sources */,
+				13DA56081EB3867E00C41F1A /* Frameworks */,
+				13DA56091EB3867E00C41F1A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Demo;
+			productName = Demo;
+			productReference = 13DA560B1EB3867E00C41F1A /* Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -148,9 +205,14 @@
 				TargetAttributes = {
 					13DA55EC1EB3865500C41F1A = {
 						CreatedOnToolsVersion = 8.3.1;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					13DA55F51EB3865500C41F1A = {
+						CreatedOnToolsVersion = 8.3.1;
+						ProvisioningStyle = Automatic;
+					};
+					13DA560A1EB3867E00C41F1A = {
 						CreatedOnToolsVersion = 8.3.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -162,6 +224,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 13DA55E31EB3865500C41F1A;
 			productRefGroup = 13DA55EE1EB3865500C41F1A /* Products */;
@@ -170,6 +233,7 @@
 			targets = (
 				13DA55EC1EB3865500C41F1A /* FLORouter */,
 				13DA55F51EB3865500C41F1A /* FLORouterTests */,
+				13DA560A1EB3867E00C41F1A /* Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -189,6 +253,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		13DA56091EB3867E00C41F1A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13DA56121EB3867E00C41F1A /* Assets.xcassets in Resources */,
+				13DA56151EB3867E00C41F1A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -196,6 +269,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13DA561D1EB38C7800C41F1A /* RoutingRequest.swift in Sources */,
+				13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */,
+				13DA561B1EB3874A00C41F1A /* Router.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +280,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DA55FC1EB3865500C41F1A /* FLORouterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13DA56071EB3867E00C41F1A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13DA56101EB3867E00C41F1A /* ViewController.swift in Sources */,
+				13DA560E1EB3867E00C41F1A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +301,17 @@
 			targetProxy = 13DA55F81EB3865500C41F1A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13DA56131EB3867E00C41F1A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13DA56141EB3867E00C41F1A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13DA55FF1EB3865500C41F1A /* Debug */ = {
@@ -319,6 +415,7 @@
 		13DA56021EB3865500C41F1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -332,6 +429,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.floschliep.FLORouter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -339,6 +437,7 @@
 		13DA56031EB3865500C41F1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -359,6 +458,7 @@
 		13DA56051EB3865500C41F1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FLORouterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -371,10 +471,37 @@
 		13DA56061EB3865500C41F1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FLORouterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.floschliep.FLORouterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		13DA56181EB3867E00C41F1A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.floschliep.Demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		13DA56191EB3867E00C41F1A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Demo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.floschliep.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -399,6 +526,7 @@
 				13DA56031EB3865500C41F1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		13DA56041EB3865500C41F1A /* Build configuration list for PBXNativeTarget "FLORouterTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +535,16 @@
 				13DA56061EB3865500C41F1A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13DA56171EB3867E00C41F1A /* Build configuration list for PBXNativeTarget "Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13DA56181EB3867E00C41F1A /* Debug */,
+				13DA56191EB3867E00C41F1A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
