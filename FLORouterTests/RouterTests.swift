@@ -7,7 +7,6 @@
 //
 
 import XCTest
-@testable import FLORouter
 
 class RouterTests: XCTestCase {
     
@@ -20,14 +19,14 @@ class RouterTests: XCTestCase {
     
     /// Test automatic registration
     func testSingleRegistration() {
-        let id = self.router.register("") { _ in }
+        let id = self.router.register("") { _ in return false }
         XCTAssertEqual(self.router.handlers.count, 1)
         XCTAssertEqual(self.router.handlers.first!.value.id, id)
     }
     
     /// Test automatic multi registration
     func testMultiRegistration() {
-        let ids = self.router.register(["", "", ""]) { _ in }
+        let ids = self.router.register(["", "", ""]) { _ in return false }
         XCTAssertEqual(self.router.handlers.count, 3)
         for id in ids {
             XCTAssertTrue(self.router.handlers.contains(where: { $1.id == id }))
@@ -36,7 +35,7 @@ class RouterTests: XCTestCase {
     
     /// Test manual registration
     func testManualRegistration() {
-        let handler = RouteHandler(route: "", scheme: nil, priority: 0) { _ in }
+        let handler = RouteHandler(route: "", scheme: nil, priority: 0) { _ in return false }
         let id = self.router.register(handler)
         XCTAssertEqual(self.router.handlers.count, 1)
         XCTAssertEqual(self.router.handlers.first!.key, id)
@@ -45,7 +44,7 @@ class RouterTests: XCTestCase {
     
     /// Test unregistration using IDs
     func testHandlerUnregistration() {
-        let id = self.router.register("") { _ in }
+        let id = self.router.register("") { _ in return false }
         XCTAssertEqual(self.router.handlers.count, 1)
         self.router.unregisterHandler(with: id)
         XCTAssertEqual(self.router.handlers.count, 0)
@@ -56,9 +55,9 @@ class RouterTests: XCTestCase {
     /// Verify scheme is ignored for unregistration
     func testRouteUnregistration() {
         let route = "/test"
-        self.router.register(route) { _ in }
-        self.router.register(route, for: "test1") { _ in }
-        let idToKeep = self.router.register("/test2") { _ in }
+        self.router.register(route) { _ in return false }
+        self.router.register(route, for: "test1") { _ in return false }
+        let idToKeep = self.router.register("/test2") { _ in return false }
         XCTAssertEqual(self.router.handlers.count, 3)
         self.router.unregister(route)
         XCTAssertEqual(self.router.handlers.count, 1)
@@ -71,14 +70,60 @@ class RouterTests: XCTestCase {
     func testRouteSchemeUnregistration() {
         let route = "/test"
         let scheme = "test1"
-        let idToKeep1 = self.router.register(route) { _ in }
-        self.router.register(route, for: scheme) { _ in }
-        let idToKeep2 = self.router.register("/test2", for: scheme) { _ in }
+        let idToKeep1 = self.router.register(route) { _ in return false }
+        self.router.register(route, for: scheme) { _ in return false }
+        let idToKeep2 = self.router.register("/test2", for: scheme) { _ in return false }
         XCTAssertEqual(self.router.handlers.count, 3)
         self.router.unregister(route, for: scheme)
         XCTAssertEqual(self.router.handlers.count, 2)
         XCTAssertTrue(self.router.handlers.contains(where: { $0.key == idToKeep1 }))
         XCTAssertTrue(self.router.handlers.contains(where: { $0.key == idToKeep2 }))
+    }
+    
+    func testRoutingPriority() {
+        var lastCheckedPriority = 999
+        
+        func action(withPriority actionPriority: Int) -> ((RoutingRequest) -> Bool) {
+            return { _ in
+                if lastCheckedPriority < actionPriority {
+                    XCTFail("Checked \(lastCheckedPriority) before \(actionPriority)")
+                }
+                lastCheckedPriority = actionPriority
+                
+                return false
+            }
+        }
+        
+        self.router.register("*", priority: 50, action: action(withPriority: 50))
+        self.router.register("*", priority: 100, action: action(withPriority: 100))
+        self.router.register("*", priority: 150, action: action(withPriority: 150))
+        self.router.register("*", priority: 1, action: action(withPriority: 1))
+        self.router.register("*", priority: 0, action: action(withPriority: 0))
+        self.router.route(urlString: "scheme://")
+    }
+    
+    func testRoutingStopping() {
+        var calledBlock1 = false
+        var calledBlock2 = false
+        var calledBlock3 = false
+        
+        self.router.register("*", priority: 100) { _ in
+            calledBlock1 = true
+            return false
+        }
+        self.router.register("*", priority: 99) { _ in
+            calledBlock2 = true
+            return true
+        }
+        self.router.register("*", priority: 98) { _ in
+            calledBlock3 = true
+            return true
+        }
+        self.router.route(urlString: "scheme://")
+        
+        XCTAssertTrue(calledBlock1)
+        XCTAssertTrue(calledBlock2)
+        XCTAssertFalse(calledBlock3)
     }
     
 }
