@@ -8,11 +8,21 @@
 
 import Foundation
 
+/// A RoutingRequest object represents the request to route an URL.
+/// After instantiating a RoutingRequest, it parses the URL and stores its information as well as the URL itself.
+/// Matching a request with a route is called fulfillment. When calling fulfill(with:) on RoutingRequest object, the object's URL is being matched with a given route, which the object also uses to get and store more information about the URL.
 public final class RoutingRequest: NSObject, NSCopying {
     
+    /// URL which was used to open the app
     public let url: URL
+    
+    /// Scheme of the URL
     public let scheme: String
+    
+    /// Parameters of the URL. Nil until request was fulfilled. Will contain query parameters as well as fulfilled placeholders.
     public private(set) var parameters: [String: String?]?
+    
+    /// Wildcard component of the URL if a wilcard route was fulfilled
     public private(set) var wildcardComponents: URLComponents?
     
 // MARK: - Internal Properties
@@ -22,12 +32,22 @@ public final class RoutingRequest: NSObject, NSCopying {
     
 // MARK: - Instantiation
     
+    /// Instantiate a new request for a given string that represents a valid URL.
+    ///
+    /// - Parameter string: Valid URL string
+    /// - Parameter resolveFragment: Boolean indicating whether the fragment of the URL, if it exists, should be merged with the path and query of the URL.
+    /// - Returns: A request which is ready to be fulfilled or nil if the URL could not be parsed or has no scheme.
     public convenience init?(string: String, resolveFragment: Bool = false) {
         guard let url = URL(string: string) else { return nil }
         self.init(url: url, resolveFragment: resolveFragment)
     }
     
-    public init?(url: URL, resolveFragment: Bool) {
+    /// Instantiate a new request for a given URL.
+    ///
+    /// - Parameter url: URL used to open the app
+    /// - Parameter resolveFragment: Boolean indicating whether the fragment of the URL, if it exists, should be merged with the path and query of the URL.
+    /// - Returns: A request which is ready to be fulfilled or nil if the URL could not be parsed or has no scheme.
+    public required init?(url: URL, resolveFragment: Bool) {
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
         self.url = url
         
@@ -44,6 +64,7 @@ public final class RoutingRequest: NSObject, NSCopying {
         super.init()
     }
     
+    /// Private initializer used for copying without unnecessary validation or parsing
     private init(url: URL, scheme: String, pathComponents: [String], queryItems: [URLQueryItem]?) {
         self.url = url
         self.scheme = scheme
@@ -65,6 +86,11 @@ public final class RoutingRequest: NSObject, NSCopying {
     
 // MARK: - Actions
     
+    /// Fulfill the request with a given route. A request should only be fulfilled once. Make a copy of the request if appropriate.
+    /// The URL's scheme will be ignored here.
+    ///
+    /// - Parameter route: Route for which the request should be fulfilled. May contain a wildcard (*) at the end or placeholders (:abc) anywhere.
+    /// - Returns: Boolean indicating whether the given route was able to fulfill the request.
     public func fulfill(with route: String) -> Bool {
         let routeComponents = route.pathComponents
         var parameters = [String: String?]()
@@ -117,18 +143,18 @@ public final class RoutingRequest: NSObject, NSCopying {
 
 extension URLComponents {
     mutating func moveHostToPath() {
-        guard let host = self.percentEncodedHost, host.characters.count > 0, host != "/" else { return }
+        guard let host = self.host, host.characters.count > 0, host != "/" else { return }
         // convert the host to "/" so that the host is considered a path component
         self.host = "/"
-        self.percentEncodedPath = host.appending(self.percentEncodedPath)
+        self.path = host.appending(self.path)
     }
     
     mutating func resolveFragment() {
         // credits to joeldev for his fragment handling: https://github.com/joeldev/JLRoutes/blob/master/JLRoutes/Classes/JLRRouteRequest.m
         // if the URL contains a query or path in the fragment, we will include it in the main path
         // so we can easier handle it later on
-        guard let fragment = self.percentEncodedFragment, var fragmentComponents = URLComponents(string: fragment) else { return }
-        var path = self.percentEncodedPath
+        guard let fragment = self.fragment, var fragmentComponents = URLComponents(string: fragment) else { return }
+        var path = self.path
         
         if fragmentComponents.query == nil {
             fragmentComponents.query = fragmentComponents.path
@@ -151,14 +177,14 @@ extension URLComponents {
         
         if !fragmentContainsQuery || fragmentComponents.path != fragmentComponents.query {
             // handle fragment by include fragment path as part of the main path
-            path = path.appendingFormat("#%@", fragmentComponents.percentEncodedPath)
+            path = path.appendingFormat("#%@", fragmentComponents.path)
         }
         
-        self.percentEncodedPath = path
+        self.path = path
     }
     
     var pathComponents: [String] {
-        return self.percentEncodedPath.pathComponents
+        return self.path.pathComponents
     }
 }
 
