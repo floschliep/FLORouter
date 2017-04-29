@@ -80,13 +80,39 @@ public class Router: NSObject {
         }).map({ $1 })
     }
     
-// MARK: - URL Handling
+// MARK: - URL Routing
     
     @objc
     private func handleEvent(_ event: NSAppleEventDescriptor, with replyEvent: NSAppleEventDescriptor) {
         guard let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue else { return }
-        _ = RoutingRequest(string: urlString, resolveFragment: self.resolveURLFragments)
+        self.route(urlString: urlString)
+    }
+    
+    @discardableResult
+    public func route(url: URL) -> Bool {
+        guard let request = RoutingRequest(url: url, resolveFragment: self.resolveURLFragments) else { return false }
+        return self.route(request: request)
+    }
+    
+    @discardableResult
+    public func route(urlString: String) -> Bool {
+        guard let request = RoutingRequest(string: urlString, resolveFragment: self.resolveURLFragments) else { return false }
+        return self.route(request: request)
+    }
+    
+    @discardableResult
+    public func route(request: RoutingRequest) -> Bool {
+        let handlers = self.handlers.filter({ _, handler in
+            return (handler.scheme == nil || handler.scheme == request.scheme)
+        }).sorted {
+            return ($0.1.priority > $1.1.priority)
+        }
+        for (_, handler) in handlers {
+            guard handler.handle(request: request) else { continue }
+            return true
+        }
         
+        return false
     }
     
 }
