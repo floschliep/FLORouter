@@ -13,6 +13,8 @@ public class Router: NSObject {
     @objc(globalRouter)
     public static let global = Router()
     
+    public var resolveURLFragments = false
+    
 // MARK: - Instantiation
     
     public override init() {
@@ -78,14 +80,12 @@ public class Router: NSObject {
         }).map({ $1 })
     }
     
-    
 // MARK: - URL Handling
     
     @objc
     private func handleEvent(_ event: NSAppleEventDescriptor, with replyEvent: NSAppleEventDescriptor) {
         guard let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue else { return }
-        guard let url = URL(string: urlString) else { return }
-        
+        _ = RoutingRequest(string: urlString, resolveFragment: self.resolveURLFragments)
         
     }
     

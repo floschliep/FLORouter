@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias RouteHandlerAction = (RoutingRequest) -> Void
+public typealias RouteHandlerAction = (RoutingRequest) -> Bool
 public typealias RouteHandlerID = Int
 
 open class RouteHandler: NSObject {
@@ -26,6 +26,15 @@ open class RouteHandler: NSObject {
         self.action = action
         self.id = -1
         super.init()
+    }
+    
+    public func handle(request: RoutingRequest) -> Bool {
+        if let scheme = self.scheme, scheme != request.scheme {
+            return false
+        }
+        guard request.fulfill(with: self.route) else { return false }
+        
+        return self.action(request)
     }
     
 }
