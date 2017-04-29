@@ -29,9 +29,10 @@ open class RouteHandler: NSObject {
     }
     
     public func handle(request: RoutingRequest) -> Bool {
-        if let scheme = self.scheme, scheme != request.scheme {
-            return false
+        if let scheme = self.scheme {
+            guard scheme == request.scheme else { return false }
         }
+        let request = request.copy() as! RoutingRequest
         guard request.fulfill(with: self.route) else { return false }
         
         return self.action(request)
