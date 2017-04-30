@@ -13,7 +13,7 @@ import Foundation
 /// Each registered handler gets assigned a unique RouteHandlerID that identifies the RouteHandler instance during the lifetime of the Router.
 /// The Router class is not thread-safe. You should access Router objects from the main thread only.
 @objc(FLORouter)
-public class Router: NSObject {
+public class Router: NSObject, URLEventHandlerListener {
     
     @objc(globalRouter)
     public static let global = Router()
@@ -25,11 +25,11 @@ public class Router: NSObject {
     
     public override init() {
         super.init()
-        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(_:with:)), forEventClass: UInt32(kInternetEventClass), andEventID: UInt32(kAEGetURL))
+        URLEventHandler.global.addListener(self)
     }
     
     deinit {
-        NSAppleEventManager.shared().removeEventHandler(forEventClass: UInt32(kInternetEventClass), andEventID: UInt32(kAEGetURL))
+        URLEventHandler.global.removeListener(self)
     }
     
 // MARK: - Registration
@@ -137,10 +137,8 @@ public class Router: NSObject {
     
 // MARK: - URL Routing
     
-    @objc
-    private func handleEvent(_ event: NSAppleEventDescriptor, with replyEvent: NSAppleEventDescriptor) {
-        guard let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue else { return }
-        self.route(urlString: urlString)
+    public func handleEvent(with url: String) {
+        self.route(urlString: url)
     }
     
     /// Attempts to route a URL.
