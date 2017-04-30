@@ -7,19 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		131AA9061EB6424600802CF1 /* FLORouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DA55ED1EB3865500C41F1A /* FLORouter.framework */; };
+		131AA9071EB6424600802CF1 /* FLORouter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13DA55ED1EB3865500C41F1A /* FLORouter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13A332611EB526F7004B574E /* RouteHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A332601EB526F7004B574E /* RouteHandlerTests.swift */; };
+		13A332651EB62D62004B574E /* URLEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A332641EB62D62004B574E /* URLEventHandler.swift */; };
+		13A332661EB62DB9004B574E /* URLEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A332641EB62D62004B574E /* URLEventHandler.swift */; };
+		13A332681EB6325F004B574E /* URLEventHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A332671EB6325F004B574E /* URLEventHandlerTests.swift */; };
+		13B5819E1EB3C9CF00FE553D /* RoutingRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5819D1EB3C9CF00FE553D /* RoutingRequestTests.swift */; };
+		13B5819F1EB3CA6E00FE553D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561A1EB3874A00C41F1A /* Router.swift */; };
+		13B581A01EB3CA6E00FE553D /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */; };
+		13B581A11EB3CA6E00FE553D /* RouteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561E1EB3904B00C41F1A /* RouteHandler.swift */; };
 		13DA55F71EB3865500C41F1A /* FLORouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DA55ED1EB3865500C41F1A /* FLORouter.framework */; };
-		13DA55FC1EB3865500C41F1A /* FLORouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA55FB1EB3865500C41F1A /* FLORouterTests.swift */; };
+		13DA55FC1EB3865500C41F1A /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA55FB1EB3865500C41F1A /* RouterTests.swift */; };
 		13DA55FE1EB3865500C41F1A /* FLORouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DA55F01EB3865500C41F1A /* FLORouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		13DA560E1EB3867E00C41F1A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA560D1EB3867E00C41F1A /* AppDelegate.swift */; };
 		13DA56101EB3867E00C41F1A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA560F1EB3867E00C41F1A /* ViewController.swift */; };
 		13DA56121EB3867E00C41F1A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13DA56111EB3867E00C41F1A /* Assets.xcassets */; };
 		13DA56151EB3867E00C41F1A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13DA56131EB3867E00C41F1A /* Main.storyboard */; };
-		13DA561B1EB3874A00C41F1A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561A1EB3874A00C41F1A /* Router.swift */; };
+		13DA561B1EB3874A00C41F1A /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561A1EB3874A00C41F1A /* Router.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		13DA561D1EB38C7800C41F1A /* RoutingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */; };
-		13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561E1EB3904B00C41F1A /* RouteHandler.swift */; };
+		13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA561E1EB3904B00C41F1A /* RouteHandler.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		131AA9081EB6424600802CF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13DA55E41EB3865500C41F1A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13DA55EC1EB3865500C41F1A;
+			remoteInfo = FLORouter;
+		};
 		13DA55F81EB3865500C41F1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 13DA55E41EB3865500C41F1A /* Project object */;
@@ -29,12 +46,30 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		131AA90A1EB6424600802CF1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				131AA9071EB6424600802CF1 /* FLORouter.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		13A332601EB526F7004B574E /* RouteHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteHandlerTests.swift; sourceTree = "<group>"; };
+		13A332641EB62D62004B574E /* URLEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEventHandler.swift; sourceTree = "<group>"; };
+		13A332671EB6325F004B574E /* URLEventHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEventHandlerTests.swift; sourceTree = "<group>"; };
+		13B5819D1EB3C9CF00FE553D /* RoutingRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRequestTests.swift; sourceTree = "<group>"; };
 		13DA55ED1EB3865500C41F1A /* FLORouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLORouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13DA55F01EB3865500C41F1A /* FLORouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLORouter.h; sourceTree = "<group>"; };
 		13DA55F11EB3865500C41F1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13DA55F61EB3865500C41F1A /* FLORouterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FLORouterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		13DA55FB1EB3865500C41F1A /* FLORouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLORouterTests.swift; sourceTree = "<group>"; };
+		13DA55FB1EB3865500C41F1A /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		13DA55FD1EB3865500C41F1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13DA560B1EB3867E00C41F1A /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13DA560D1EB3867E00C41F1A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				131AA9061EB6424600802CF1 /* FLORouter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +136,7 @@
 				13DA561A1EB3874A00C41F1A /* Router.swift */,
 				13DA561C1EB38C7800C41F1A /* RoutingRequest.swift */,
 				13DA561E1EB3904B00C41F1A /* RouteHandler.swift */,
+				13A332641EB62D62004B574E /* URLEventHandler.swift */,
 				13DA55F11EB3865500C41F1A /* Info.plist */,
 			);
 			path = FLORouter;
@@ -108,7 +145,10 @@
 		13DA55FA1EB3865500C41F1A /* FLORouterTests */ = {
 			isa = PBXGroup;
 			children = (
-				13DA55FB1EB3865500C41F1A /* FLORouterTests.swift */,
+				13DA55FB1EB3865500C41F1A /* RouterTests.swift */,
+				13B5819D1EB3C9CF00FE553D /* RoutingRequestTests.swift */,
+				13A332671EB6325F004B574E /* URLEventHandlerTests.swift */,
+				13A332601EB526F7004B574E /* RouteHandlerTests.swift */,
 				13DA55FD1EB3865500C41F1A /* Info.plist */,
 			);
 			path = FLORouterTests;
@@ -183,10 +223,12 @@
 				13DA56071EB3867E00C41F1A /* Sources */,
 				13DA56081EB3867E00C41F1A /* Frameworks */,
 				13DA56091EB3867E00C41F1A /* Resources */,
+				131AA90A1EB6424600802CF1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				131AA9091EB6424600802CF1 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -210,6 +252,7 @@
 					};
 					13DA55F51EB3865500C41F1A = {
 						CreatedOnToolsVersion = 8.3.1;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					13DA560A1EB3867E00C41F1A = {
@@ -270,8 +313,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DA561D1EB38C7800C41F1A /* RoutingRequest.swift in Sources */,
-				13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */,
 				13DA561B1EB3874A00C41F1A /* Router.swift in Sources */,
+				13DA561F1EB3904B00C41F1A /* RouteHandler.swift in Sources */,
+				13A332651EB62D62004B574E /* URLEventHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +323,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13DA55FC1EB3865500C41F1A /* FLORouterTests.swift in Sources */,
+				13B581A01EB3CA6E00FE553D /* RoutingRequest.swift in Sources */,
+				13DA55FC1EB3865500C41F1A /* RouterTests.swift in Sources */,
+				13B5819F1EB3CA6E00FE553D /* Router.swift in Sources */,
+				13A332681EB6325F004B574E /* URLEventHandlerTests.swift in Sources */,
+				13A332661EB62DB9004B574E /* URLEventHandler.swift in Sources */,
+				13B5819E1EB3C9CF00FE553D /* RoutingRequestTests.swift in Sources */,
+				13A332611EB526F7004B574E /* RouteHandlerTests.swift in Sources */,
+				13B581A11EB3CA6E00FE553D /* RouteHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +346,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		131AA9091EB6424600802CF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13DA55EC1EB3865500C41F1A /* FLORouter */;
+			targetProxy = 131AA9081EB6424600802CF1 /* PBXContainerItemProxy */;
+		};
 		13DA55F91EB3865500C41F1A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 13DA55EC1EB3865500C41F1A /* FLORouter */;
@@ -459,11 +515,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FLORouterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.floschliep.FLORouterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -472,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = FLORouterTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -484,6 +543,7 @@
 		13DA56181EB3867E00C41F1A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
@@ -497,6 +557,7 @@
 		13DA56191EB3867E00C41F1A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Demo/Info.plist;
