@@ -11,6 +11,7 @@ import Foundation
 /// A RoutingRequest object represents the request to route an URL.
 /// After instantiating a RoutingRequest, it parses the URL and stores its information as well as the URL itself.
 /// Matching a request with a route is called fulfillment. When calling fulfill(with:) on RoutingRequest object, the object's URL is being matched with a given route, which the object also uses to get and store more information about the URL.
+@objc(FLORoutingRequest)
 public final class RoutingRequest: NSObject, NSCopying {
     
     /// URL which was used to open the app
