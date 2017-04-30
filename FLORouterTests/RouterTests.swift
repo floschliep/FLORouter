@@ -126,6 +126,59 @@ class RouterTests: XCTestCase {
         XCTAssertFalse(calledBlock3)
     }
     
+    func testIntegration() {
+        var url = URL(string: "scheme://test")!
+        var calledBlock = false
+        self.router.register("/test") { request in
+            XCTAssertEqual(request.url, url)
+            calledBlock = true
+            
+            return true
+        }
+        _ = MockSendAppleEvent(with: &url)
+        XCTAssertTrue(calledBlock)
+    }
+    
+    func testMultipleRouters() {
+        let router1 = Router()
+        var calledBlock1 = false
+        router1.register("/test") { _ in
+            calledBlock1 = true
+            return true
+        }
+        
+        let router2 = Router()
+        var calledBlock2 = false
+        router2.register("/test") { _ in
+            calledBlock2 = true
+            return true
+        }
+        
+        weak var weakRouter3: Router?
+        weak var weakHandler3: RouteHandler?
+        var calledBlock3 = false
+        autoreleasepool {
+            let handler3 = RouteHandler(route: "/test", scheme: nil, priority: 0, action: { _ in
+                calledBlock3 = true
+                return true
+            })
+            
+            let router3 = Router()
+            router3.register(handler3)
+            
+            weakHandler3 = handler3
+            weakRouter3 = router3
+        }
+        
+        var url = URL(string: "scheme://test")!
+        _ = MockSendAppleEvent(with: &url)
+        XCTAssertTrue(calledBlock1)
+        XCTAssertTrue(calledBlock2)
+        XCTAssertNil(weakRouter3)
+        XCTAssertNil(weakHandler3)
+        XCTAssertFalse(calledBlock3)
+    }
+    
 }
 
 class TestRouter: Router {
