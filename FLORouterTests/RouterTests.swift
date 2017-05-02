@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import FLORouter
 
 class RouterTests: XCTestCase {
     
