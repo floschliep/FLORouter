@@ -14,6 +14,7 @@
 		13A332681EB6325F004B574E /* URLEventHandlerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A332671EB6325F004B574E /* URLEventHandlerTests.swift */; };
 		13B5819E1EB3C9CF00FE553D /* RoutingRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B5819D1EB3C9CF00FE553D /* RoutingRequestTests.swift */; };
 		13D784A31EB8E28B00E0A305 /* RouteComponentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D784A21EB8E28B00E0A305 /* RouteComponentTests.swift */; };
+		13D784A51EB8E76B00E0A305 /* URLParsingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D784A41EB8E76B00E0A305 /* URLParsingTests.swift */; };
 		13DA55F71EB3865500C41F1A /* FLORouter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13DA55ED1EB3865500C41F1A /* FLORouter.framework */; };
 		13DA55FC1EB3865500C41F1A /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DA55FB1EB3865500C41F1A /* RouterTests.swift */; };
 		13DA55FE1EB3865500C41F1A /* FLORouter.h in Headers */ = {isa = PBXBuildFile; fileRef = 13DA55F01EB3865500C41F1A /* FLORouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,6 +64,7 @@
 		13A332671EB6325F004B574E /* URLEventHandlerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLEventHandlerTests.swift; sourceTree = "<group>"; };
 		13B5819D1EB3C9CF00FE553D /* RoutingRequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutingRequestTests.swift; sourceTree = "<group>"; };
 		13D784A21EB8E28B00E0A305 /* RouteComponentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteComponentTests.swift; sourceTree = "<group>"; };
+		13D784A41EB8E76B00E0A305 /* URLParsingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLParsingTests.swift; sourceTree = "<group>"; };
 		13DA55ED1EB3865500C41F1A /* FLORouter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FLORouter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		13DA55F01EB3865500C41F1A /* FLORouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLORouter.h; sourceTree = "<group>"; };
 		13DA55F11EB3865500C41F1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				13A332671EB6325F004B574E /* URLEventHandlerTests.swift */,
 				13A332601EB526F7004B574E /* RouteHandlerTests.swift */,
 				13D784A21EB8E28B00E0A305 /* RouteComponentTests.swift */,
+				13D784A41EB8E76B00E0A305 /* URLParsingTests.swift */,
 				13DA55FD1EB3865500C41F1A /* Info.plist */,
 			);
 			path = FLORouterTests;
@@ -324,6 +327,7 @@
 			files = (
 				13DA55FC1EB3865500C41F1A /* RouterTests.swift in Sources */,
 				13A332681EB6325F004B574E /* URLEventHandlerTests.swift in Sources */,
+				13D784A51EB8E76B00E0A305 /* URLParsingTests.swift in Sources */,
 				13D784A31EB8E28B00E0A305 /* RouteComponentTests.swift in Sources */,
 				13B5819E1EB3C9CF00FE553D /* RoutingRequestTests.swift in Sources */,
 				13A332611EB526F7004B574E /* RouteHandlerTests.swift in Sources */,
