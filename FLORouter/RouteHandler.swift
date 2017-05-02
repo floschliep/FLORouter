@@ -98,3 +98,19 @@ enum RouteComponent {
         return components
     }
 }
+
+extension RouteComponent: Equatable {
+    static func ==(lhs: RouteComponent, rhs: RouteComponent) -> Bool {
+        switch lhs {
+        case .path(let lhsName):
+            guard case .path(let rhsName) = rhs else { return false }
+            return (lhsName == rhsName)
+        case .placeholder(let lhsName):
+            guard case .placeholder(let rhsName) = rhs else { return false }
+            return (lhsName == rhsName)
+        case .wildcard:
+            guard case .wildcard = rhs else { return false }
+            return true
+        }
+    }
+}

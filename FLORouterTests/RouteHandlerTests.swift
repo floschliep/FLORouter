@@ -16,6 +16,7 @@ class RouteHandlerTests: XCTestCase {
         
         let handler1 = RouteHandler(route: "my/route", scheme: nil, priority: 100) { _ in return false }
         XCTAssertEqual(handler1.route, "my/route")
+        XCTAssertEqual(handler1.routeComponents, RouteComponents(.path("my"), .path("route")))
         XCTAssertNil(handler1.scheme)
         XCTAssertEqual(handler1.priority, 100)
         XCTAssertFalse(handler1.action(request))
