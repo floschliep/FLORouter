@@ -87,7 +87,7 @@ public class Router: NSObject, URLEventHandlerListener {
     
 // MARK: - Handler Management
     
-    private(set) var handlers: [Int: RouteHandler] = [:]
+    private(set) var handlers: [RouteHandlerID: RouteHandler] = [:]
     private var currentHandlerIndex = -1
     
     /// Registers a specific handler with the router.
@@ -125,16 +125,6 @@ public class Router: NSObject, URLEventHandlerListener {
         }
     }
     
-    /// Filters handlers that match a certain scheme.
-    ///
-    /// - Parameter scheme: Scheme to match.
-    /// - Returns: Handlers that match the scheme or don't require a scheme.
-    private func handlers(for scheme: String) -> [RouteHandler] {
-        return self.handlers { _, handler in
-            return (handler.scheme == nil || handler.scheme == scheme)
-        }
-    }
-    
 // MARK: - URL Routing
     
     public func handleEvent(with url: String) {
@@ -167,10 +157,10 @@ public class Router: NSObject, URLEventHandlerListener {
     /// - Returns: Boolean indicating whether the request could be routed successfully or not.
     @discardableResult
     public func route(request: RoutingRequest) -> Bool {
-        let handlers = self.handlers(for: request.scheme).sorted {
-            return ($0.priority > $1.priority)
+        let handlers = self.handlers.sorted {
+            return ($0.1.priority > $1.1.priority)
         }
-        for handler in handlers {
+        for (_, handler) in handlers {
             guard handler.handle(request: request) else { continue }
             return true
         }

@@ -48,7 +48,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     /// - Parameter url: URL used to open the app
     /// - Parameter resolveFragment: Boolean indicating whether the fragment of the URL, if it exists, should be merged with the path and query of the URL.
     /// - Returns: A request which is ready to be fulfilled or nil if the URL could not be parsed or has no scheme.
-    public required init?(url: URL, resolveFragment: Bool) {
+    public init?(url: URL, resolveFragment: Bool) {
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
         self.url = url
         
@@ -92,37 +92,34 @@ public final class RoutingRequest: NSObject, NSCopying {
     ///
     /// - Parameter route: Route for which the request should be fulfilled. May contain a wildcard (*) at the end or placeholders (:abc) anywhere.
     /// - Returns: Boolean indicating whether the given route was able to fulfill the request.
-    public func fulfill(with route: String) -> Bool {
-        let routeComponents = route.pathComponents
+    func fulfill(with routeComponents: [RouteComponent]) -> Bool {
         var parameters = [String: String?]()
+        // we keep track of the remaining route components while iterating through the path components
+        var remainingRouteComponents = routeComponents
         
-        for (index, component) in routeComponents.enumerated() {
-            // check if this is a wildcard component
-            // we only fulfill wildcards if they're the last component
-            if component == "*", index == routeComponents.count-1 {
-                if self.pathComponents.count >= index+1 {
-                    // we will also fulfill wildcards if it'll be empty…
-                    // …so we need to make sure there are enough path components to assemble the wildcard
-                    let remainingPath = self.pathComponents[index...self.pathComponents.endIndex-1].joined(separator: "/")
-                    self.wildcardComponents = URLComponents(string: remainingPath)
-                }
-                
-                return true
-            }
-
-            // make sure we can safely access our URL path components
-            guard self.pathComponents.count >= index+1 else { return false }
+        pathLoop: for (index, component) in self.pathComponents.enumerated() {
+            guard routeComponents.count >= index+1 else { return false }
+            let routeComponent = routeComponents[index]
+            remainingRouteComponents.remove(at: 0)
             
-            // fulfill placeholder if needed
-            if component.characters.first == ":" {
-                let parameterName = String(component.characters.dropFirst())
-                parameters[parameterName] = self.pathComponents[index]
-                // no need to check for equality here as the component is a placeholder
-                continue
+            switch routeComponent {
+            case .path(let name):
+                guard name == component else { return false }
+            case .placeholder(let name):
+                parameters[name] = component
+            case .wildcard:
+                let remainingPath = self.pathComponents[index...self.pathComponents.endIndex-1].joined(separator: "/")
+                self.wildcardComponents = URLComponents(string: remainingPath)
+                break pathLoop
             }
-
-            // compare route component to path component
-            guard component == self.pathComponents[index] else { return false }
+        }
+        
+        if remainingRouteComponents.count > 0 {
+            // if there is a remaining route component, it needs to be a wildcard
+            // wildcards may only ever be at the end of a route…
+            // …so it is only valid if there's just this one wildcard left
+            guard remainingRouteComponents.count == 1, case .wildcard = remainingRouteComponents[0] else { return false }
+            // if the wildcard is positioned after the path, there's no need to set the wildcardComponents as it would be empty
         }
         
         if let queryItems = self.queryItems {

@@ -18,11 +18,13 @@ public typealias RouteHandlerID = Int
 @objc(FLORouteHandler)
 open class RouteHandler: NSObject {
     
-    let route: String
-    let scheme: String?
-    let priority: Int
-    let action: RouteHandlerAction
-    internal var id: RouteHandlerID
+    public let route: String
+    public let scheme: String?
+    public let priority: Int
+    public let action: RouteHandlerAction
+    
+    var id: RouteHandlerID
+    let routeComponents: [RouteComponent]
     
 // MARK: - Instantiation
     
@@ -39,6 +41,7 @@ open class RouteHandler: NSObject {
         self.priority = priority
         self.action = action
         self.id = -1
+        self.routeComponents = RouteComponent.components(of: route)
         super.init()
     }
     
@@ -58,9 +61,40 @@ open class RouteHandler: NSObject {
             guard scheme == request.scheme else { return false }
         }
         let request = request.copy() as! RoutingRequest
-        guard request.fulfill(with: self.route) else { return false }
+        guard request.fulfill(with: self.routeComponents) else { return false }
         
         return self.action(request)
     }
     
+}
+
+enum RouteComponent {
+    case path(String)
+    case placeholder(String)
+    case wildcard
+    
+    static func components(of route: String) -> [RouteComponent] {
+        let pathComponents = route.pathComponents
+        var components = [RouteComponent]()
+        
+        for (index, component) in pathComponents.enumerated() {
+            // check if this is a wildcard
+            if component == "*", index == pathComponents.count-1 {
+                components.append(.wildcard)
+                break
+            }
+            
+            // check if this is a placeholder
+            if component.characters.first == ":" {
+                let parameterName = String(component.characters.dropFirst())
+                components.append(.placeholder(parameterName))
+                continue
+            }
+            
+            // normal path component
+            components.append(.path(component))
+        }
+        
+        return components
+    }
 }

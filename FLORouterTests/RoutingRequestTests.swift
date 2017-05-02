@@ -37,6 +37,8 @@ class RoutingRequestTests: XCTestCase {
         XCTAssertFalse(request.fulfill(with: "my/other/path"))
         XCTAssertFalse(request.fulfill(with: "other/path"))
         XCTAssertFalse(request.fulfill(with: "none"))
+        XCTAssertFalse(request.fulfill(with: "my/test/path/is/too/long"))
+        XCTAssertFalse(request.fulfill(with: "my/test"))
     }
     
     func testPathParsing() {
@@ -95,6 +97,10 @@ class RoutingRequestTests: XCTestCase {
         self.copyRequest(request: &request)
         XCTAssertFalse(request.fulfill(with: "test/*/to/*"))
         XCTAssertNil(request.wildcardComponents)
+        
+        self.copyRequest(request: &request)
+        XCTAssertFalse(request.fulfill(with: "test/path/to/some/resource/invalid/*"))
+        XCTAssertNil(request.wildcardComponents)
     }
     
     func testQueryFulfillment() {
@@ -124,4 +130,10 @@ class RoutingRequestTests: XCTestCase {
         request = request.copy() as! RoutingRequest
     }
     
+}
+
+extension RoutingRequest {
+    func fulfill(with route: String) -> Bool {
+        return self.fulfill(with: RouteComponent.components(of: route))
+    }
 }

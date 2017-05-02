@@ -36,7 +36,7 @@ public final class URLEventHandler: NSObject {
     
     @objc
     private func handleEvent(_ event: NSAppleEventDescriptor, with replyEvent: NSAppleEventDescriptor) {
-        guard let urlString = event.paramDescriptor(forKeyword: UInt32(keyDirectObject))?.stringValue else { return }
+        guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue else { return }
         for listener in self.listeners {
             listener.object?.handleEvent(with: urlString)
         }
