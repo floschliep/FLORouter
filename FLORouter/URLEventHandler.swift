@@ -8,9 +8,9 @@
 
 import Foundation
 
-@objc(FLOURLEventHandlerListener)
-public protocol URLEventHandlerListener: class {
-    func handleEvent(with url: String)
+@objc(FLOURLEventListener)
+public protocol URLEventListener: class {
+    func handleURL(_ url: String)
 }
 
 /// The global URLEventHandler instance receives URL Events, i.e. when an app is being opened using an URL, and sends them to its listeners.
@@ -38,18 +38,18 @@ public final class URLEventHandler: NSObject {
     private func handleEvent(_ event: NSAppleEventDescriptor, with replyEvent: NSAppleEventDescriptor) {
         guard let urlString = event.paramDescriptor(forKeyword: AEKeyword(keyDirectObject))?.stringValue else { return }
         for listener in self.listeners {
-            listener.object?.handleEvent(with: urlString)
+            listener.object?.handleURL(urlString)
         }
     }
     
 // MARK: - Listeners
     
-    private var listeners = [WeakObject<URLEventHandlerListener>]()
+    private var listeners = [WeakObject<URLEventListener>]()
     
     /// Adds a listener to the handler.
     ///
     /// - Parameter listener: Listener to add. The handler will keep a weak reference to the listener.
-    public func addListener(_ listener: URLEventHandlerListener) {
+    public func addListener(_ listener: URLEventListener) {
         self.listeners.append(WeakObject(object: listener))
     }
     
@@ -58,7 +58,7 @@ public final class URLEventHandler: NSObject {
     /// - Parameter listener: Listener to remove.
     /// - Returns: Boolean indicating whether the listener was removed or not, meaning it couldn't be found.
     @discardableResult
-    public func removeListener(_ listener: URLEventHandlerListener) -> Bool {
+    public func removeListener(_ listener: URLEventListener) -> Bool {
         guard let index = self.listeners.index(where: { $0.object === listener }) else { return false }
         self.listeners.remove(at: index)
         

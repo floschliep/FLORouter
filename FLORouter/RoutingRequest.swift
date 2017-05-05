@@ -21,7 +21,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     public let scheme: String
     
     /// Parameters of the URL. Nil until request was fulfilled. Will contain query parameters as well as fulfilled placeholders.
-    public private(set) var parameters: [String: String?]?
+    public private(set) var parameters: [String: String]?
     
     /// Wildcard component of the URL if a wilcard route was fulfilled
     public private(set) var wildcardComponents: URLComponents?
@@ -93,7 +93,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     /// - Parameter route: Route for which the request should be fulfilled. May contain a wildcard (*) at the end or placeholders (:abc) anywhere.
     /// - Returns: Boolean indicating whether the given route was able to fulfill the request.
     func fulfill(with routeComponents: [RouteComponent]) -> Bool {
-        var parameters = [String: String?]()
+        var parameters = [String: String]()
         // we keep track of the remaining route components while iterating through the path components
         var remainingRouteComponents = routeComponents
         
@@ -124,7 +124,8 @@ public final class RoutingRequest: NSObject, NSCopying {
         
         if let queryItems = self.queryItems {
             for item in queryItems {
-                parameters[item.name] = (item.value?.characters.count != 0) ? item.value : nil
+                guard let value = item.value, value.characters.count > 0 else { continue }
+                parameters[item.name] = value
             }
         }
         

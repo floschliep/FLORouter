@@ -13,7 +13,7 @@ import Foundation
 /// Each registered handler gets assigned a unique RouteHandlerID that identifies the RouteHandler instance during the lifetime of the Router.
 /// The Router class is not thread-safe. You should access Router objects from the main thread only.
 @objc(FLORouter)
-public class Router: NSObject, URLEventHandlerListener {
+public class Router: NSObject, URLEventListener {
     
     @objc(globalRouter)
     public static let global = Router()
@@ -63,6 +63,7 @@ public class Router: NSObject, URLEventHandlerListener {
     }
     
     /// Unregisters all handlers.
+    @objc(unregisterAllHandlers)
     public func unregisterAll() {
         self.handlers.removeAll()
     }
@@ -70,6 +71,7 @@ public class Router: NSObject, URLEventHandlerListener {
     /// Unregisters a specific handler.
     ///
     /// - Parameter id: ID of the handlers you want to unregister.
+    @objc(unregisterHandlerWithID:)
     public func unregisterHandler(with id: RouteHandlerID) {
         self.handlers.removeValue(forKey: id)
     }
@@ -79,6 +81,7 @@ public class Router: NSObject, URLEventHandlerListener {
     /// - Parameters:
     ///   - route: Route scheme of the handlers you want to unregister.
     ///   - scheme: Optional scheme used to match handlers. If nil, all schemes will be matched.
+    @objc(unregisterRoute:forScheme:)
     public func unregister(_ route: String, for scheme: String? = nil) {
         for handler in self.handlers(with: route, for: scheme) {
             self.handlers.removeValue(forKey: handler.id)
@@ -127,7 +130,7 @@ public class Router: NSObject, URLEventHandlerListener {
     
 // MARK: - URL Routing
     
-    public func handleEvent(with url: String) {
+    public func handleURL(_ url: String) {
         self.route(urlString: url)
     }
     

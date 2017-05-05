@@ -75,9 +75,9 @@ func MockSendAppleEvent(with url: inout URL) -> OSErr {
     return error
 }
 
-private class MockListener: URLEventHandlerListener {
+private class MockListener: URLEventListener {
     private(set) var handledURL: String?
-    func handleEvent(with url: String) {
+    func handleURL(_ url: String) {
         self.handledURL = url
     }
 }
