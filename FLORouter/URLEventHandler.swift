@@ -49,6 +49,7 @@ public final class URLEventHandler: NSObject {
     /// Adds a listener to the handler.
     ///
     /// - Parameter listener: Listener to add. The handler will keep a weak reference to the listener.
+    @objc
     public func addListener(_ listener: URLEventListener) {
         self.listeners.append(WeakObject(object: listener))
     }
@@ -58,6 +59,7 @@ public final class URLEventHandler: NSObject {
     /// - Parameter listener: Listener to remove.
     /// - Returns: Boolean indicating whether the listener was removed or not, meaning it couldn't be found.
     @discardableResult
+    @objc
     public func removeListener(_ listener: URLEventListener) -> Bool {
         guard let index = self.listeners.index(where: { $0.object === listener }) else { return false }
         self.listeners.remove(at: index)

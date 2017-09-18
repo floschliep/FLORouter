@@ -19,6 +19,7 @@ public class Router: NSObject, URLEventListener {
     public static let global = Router()
     
     /// Boolean indicating whether the fragments of routed URLs, if existent, should be merged with the path and query of the URL. Will be passed to RoutingRequest objects. Defaults to false.
+    @objc
     public var resolveURLFragments = false
     
 // MARK: - Instantiation
@@ -130,6 +131,7 @@ public class Router: NSObject, URLEventListener {
     
 // MARK: - URL Routing
     
+    @objc
     public func handleURL(_ url: String) {
         self.route(urlString: url)
     }
@@ -139,6 +141,7 @@ public class Router: NSObject, URLEventListener {
     /// - Parameter url: URL to route.
     /// - Returns: Boolean indicating whether the URL could be routed successfully or not.
     @discardableResult
+    @objc
     public func route(url: URL) -> Bool {
         guard let request = RoutingRequest(url: url, resolveFragment: self.resolveURLFragments) else { return false }
         return self.route(request: request)
@@ -149,6 +152,7 @@ public class Router: NSObject, URLEventListener {
     /// - Parameter urlString: Valid URL string.
     /// - Returns: Boolean indicating whether an URL wiht the string could be routed successfully or not.
     @discardableResult
+    @objc
     public func route(urlString: String) -> Bool {
         guard let request = RoutingRequest(string: urlString, resolveFragment: self.resolveURLFragments) else { return false }
         return self.route(request: request)
@@ -159,6 +163,7 @@ public class Router: NSObject, URLEventListener {
     /// - Parameter request: Request to route.
     /// - Returns: Boolean indicating whether the request could be routed successfully or not.
     @discardableResult
+    @objc
     public func route(request: RoutingRequest) -> Bool {
         let handlers = self.handlers.sorted {
             return ($0.1.priority > $1.1.priority)

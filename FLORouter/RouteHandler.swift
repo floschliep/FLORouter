@@ -18,10 +18,10 @@ public typealias RouteHandlerID = Int
 @objc(FLORouteHandler)
 open class RouteHandler: NSObject {
     
-    public let route: String
-    public let scheme: String?
-    public let priority: Int
-    public let action: RouteHandlerAction
+    @objc public let route: String
+    @objc public let scheme: String?
+    @objc public let priority: Int
+    @objc public let action: RouteHandlerAction
     
     var id: RouteHandlerID
     let routeComponents: [RouteComponent]
@@ -35,6 +35,7 @@ open class RouteHandler: NSObject {
     ///   - scheme: Optional scheme name. If nil, all schemes will be matched.
     ///   - priority: Priority of the handler. The higher the priority, the earlier it will be tried to handle.
     ///   - action: Closure which will be called if a request can be handled and was fulfilled.
+    @objc
     public required init(route: String, scheme: String?, priority: Int, action: @escaping RouteHandlerAction) {
         self.route = route
         self.scheme = scheme
@@ -46,6 +47,7 @@ open class RouteHandler: NSObject {
     }
     
     @available(*, unavailable)
+    @objc
     public override init() {
         fatalError()
     }
@@ -56,6 +58,7 @@ open class RouteHandler: NSObject {
     ///
     /// - Parameter request: Request to handle. If the scheme matches (or is nil), a copy of the request will be tried to fulfill and passed to the action closure.
     /// - Returns: Boolean indicating whether the request was fulfilled and handled. If true, the Router will stop looking for matching handlers.
+    @objc
     public func handle(request: RoutingRequest) -> Bool {
         if let scheme = self.scheme {
             guard scheme == request.scheme else { return false }

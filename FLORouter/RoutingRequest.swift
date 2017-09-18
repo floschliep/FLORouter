@@ -15,16 +15,16 @@ import Foundation
 public final class RoutingRequest: NSObject, NSCopying {
     
     /// URL which was used to open the app
-    public let url: URL
+    @objc public let url: URL
     
     /// Scheme of the URL
-    public let scheme: String
+    @objc public let scheme: String
     
     /// Parameters of the URL. Nil until request was fulfilled. Will contain query parameters as well as fulfilled placeholders.
-    public private(set) var parameters: [String: String]?
+    @objc public private(set) var parameters: [String: String]?
     
     /// Wildcard component of the URL if a wilcard route was fulfilled
-    public private(set) var wildcardComponents: URLComponents?
+    @objc public private(set) var wildcardComponents: URLComponents?
     
 // MARK: - Internal Properties
     
@@ -38,6 +38,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     /// - Parameter string: Valid URL string
     /// - Parameter resolveFragment: Boolean indicating whether the fragment of the URL, if it exists, should be merged with the path and query of the URL.
     /// - Returns: A request which is ready to be fulfilled or nil if the URL could not be parsed or has no scheme.
+    @objc
     public convenience init?(string: String, resolveFragment: Bool = false) {
         guard let url = URL(string: string) else { return nil }
         self.init(url: url, resolveFragment: resolveFragment)
@@ -48,6 +49,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     /// - Parameter url: URL used to open the app
     /// - Parameter resolveFragment: Boolean indicating whether the fragment of the URL, if it exists, should be merged with the path and query of the URL.
     /// - Returns: A request which is ready to be fulfilled or nil if the URL could not be parsed or has no scheme.
+    @objc
     public init?(url: URL, resolveFragment: Bool) {
         guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else { return nil }
         self.url = url
@@ -75,6 +77,7 @@ public final class RoutingRequest: NSObject, NSCopying {
     }
     
     @available(*, unavailable)
+    @objc
     public override init() {
         fatalError()
     }
