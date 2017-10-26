@@ -130,7 +130,7 @@ class RouterTests: XCTestCase {
     func testIntegration() {
         var url = URL(string: "scheme://test")!
         var calledBlock = false
-        self.router.register("/test") { request in
+        self.router.register("/test") { [url = url] (request) in
             XCTAssertEqual(request.url, url)
             calledBlock = true
             
