@@ -62,7 +62,7 @@ In case you don’t know all possible paths beforehand you can register a wildca
 
 ## Requirements
 
-FLORouter is written in Swift 3 but its public interface is 100% compatible with Objective-C. Requires macOS 10.9 or later.
+FLORouter is written in Swift 4 but its public interface is 100% compatible with Objective-C. Requires macOS 10.9 or later.
 
 ## Installation
 

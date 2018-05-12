@@ -88,8 +88,8 @@ enum RouteComponent {
             }
             
             // check if this is a placeholder
-            if component.characters.first == ":" {
-                let parameterName = String(component.characters.dropFirst())
+            if component.first == ":" {
+                let parameterName = String(component.dropFirst())
                 components.append(.placeholder(parameterName))
                 continue
             }

@@ -127,7 +127,7 @@ public final class RoutingRequest: NSObject, NSCopying {
         
         if let queryItems = self.queryItems {
             for item in queryItems {
-                guard let value = item.value, value.characters.count > 0 else { continue }
+                guard let value = item.value, !value.isEmpty else { continue }
                 parameters[item.name] = value
             }
         }
@@ -145,7 +145,7 @@ public final class RoutingRequest: NSObject, NSCopying {
 
 extension URLComponents {
     mutating func moveHostToPath() {
-        guard let host = self.host, host.characters.count > 0, host != "/" else { return }
+        guard let host = self.host, !host.isEmpty, host != "/" else { return }
         // convert the host to "/" so that the host is considered a path component
         self.host = "/"
         self.path = host.appending(self.path)
@@ -165,7 +165,7 @@ extension URLComponents {
         let fragmentContainsQuery: Bool
         if let queryItems = fragmentComponents.queryItems, queryItems.count > 0, let firstItemValue = queryItems[0].value {
             // determine if this fragment is only valid query params and nothing else
-            fragmentContainsQuery = (firstItemValue.characters.count > 0)
+            fragmentContainsQuery = !firstItemValue.isEmpty
         } else {
             fragmentContainsQuery = false
         }
@@ -194,12 +194,12 @@ extension String {
     var pathComponents: [String] {
         var path = self
         // strip off leading slash so that we don't have an empty first path component
-        if path.characters.first == "/" {
-            path.characters = path.characters.dropFirst()
+        if path.first == "/" {
+            path = String(path.dropFirst())
         }
         // strip off trailing slash for the same reason
-        if path.characters.last == "/" {
-            path.characters = path.characters.dropLast()
+        if path.last == "/" {
+            path = String(path.dropLast())
         }
         
         return path.components(separatedBy: "/")
