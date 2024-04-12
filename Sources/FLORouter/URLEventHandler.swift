@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ApplicationServices
 
 @objc(FLOURLEventListener)
 public protocol URLEventListener: class {
@@ -25,7 +26,7 @@ public final class URLEventHandler: NSObject {
     
     private override init() {
         super.init()
-        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(_:with:)), forEventClass: AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
+        NSAppleEventManager.shared().setEventHandler(self, andSelector: #selector(handleEvent(_:with:)), forEventClass:  AEEventClass(kInternetEventClass), andEventID: AEEventID(kAEGetURL))
     }
     
     deinit {
